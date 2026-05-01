@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* paper / ink palette — same family as WIYC but not identical. */
+  --color-ink: #0a0908;
+  --color-ink-soft: #14110f;
+  --color-paper: #f5ead0;
+  --color-paper-deep: #ece1c4;
+  --color-bone: #faf6ed;
+
+  /* accents — yin (blood) and yang (amber). these are the only two
+     accent colors. used to distinguish the two halves of a pairing. */
+  --color-blood: #c7321b;
+  --color-amber: #c89944;
+
+  --font-serif: "Instrument Serif", "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Geist", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html, body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga", "calt", "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+/* paper grain texture — used on hopeful (yang) panels */
+.paper-grain {
+  background-image:
+    radial-gradient(rgba(10, 9, 8, 0.045) 1px, transparent 1px),
+    radial-gradient(rgba(10, 9, 8, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}
+
+/* ink grain texture — used on hard (yin) panels */
+.ink-grain {
+  background-image:
+    radial-gradient(rgba(250, 246, 237, 0.03) 1px, transparent 1px),
+    radial-gradient(rgba(250, 246, 237, 0.02) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}
+
+/* the tiny pulsing dot used in masthead "live" / "today" indicators */
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-blood);
+  box-shadow: 0 0 10px rgba(199, 50, 27, 0.6);
+  animation: live-pulse 2s ease-in-out infinite;
+  display: inline-block;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* "the rule" — the central horizontal divider that splits a pairing.
+   thin, ink-colored on paper background. */
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(10, 9, 8, 0.18) 12%,
+    rgba(10, 9, 8, 0.18) 88%,
+    transparent 100%
+  );
+}
