@@ -4,6 +4,10 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Dispatch from "../components/Dispatch";
+import {
+  BreadcrumbSchema,
+  NewsArticleSchema,
+} from "../components/StructuredData";
 import { allSlugs, getPairing, PAIRINGS, TOPIC_LABEL } from "../lib/pairings";
 import { formatDate } from "../lib/format";
 
@@ -52,6 +56,21 @@ export default async function PairingPage({
   return (
     <>
       <Header />
+      <NewsArticleSchema pairing={p} />
+      <BreadcrumbSchema
+        trail={[
+          { name: "yinyan.news", url: "https://yinyan.news" },
+          { name: "archive", url: "https://yinyan.news/archive" },
+          {
+            name: TOPIC_LABEL[p.topic],
+            url: `https://yinyan.news/topic/${p.topic}`,
+          },
+          {
+            name: p.hard.headline,
+            url: `https://yinyan.news/${p.slug}`,
+          },
+        ]}
+      />
 
       <article className="bg-paper">
         {/* metadata strip */}
@@ -64,19 +83,32 @@ export default async function PairingPage({
           </Link>
           <div className="mt-6 flex flex-wrap items-baseline justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.25em] text-ink/55">
             <div className="flex items-center gap-3">
-              <span className="text-ink/70">{formatDate(p.date)}</span>
+              <time dateTime={p.date} className="text-ink/70">
+                {formatDate(p.date)}
+              </time>
               <span className="text-ink/30">·</span>
-              <span>{TOPIC_LABEL[p.topic]}</span>
+              <Link
+                href={`/topic/${p.topic}`}
+                className="hover:text-blood"
+              >
+                {TOPIC_LABEL[p.topic]}
+              </Link>
             </div>
             <span className="text-ink/40">{p.slug}</span>
           </div>
         </div>
 
+        {/* h1 sits above both halves so news crawlers see one unambiguous
+            article subject. visually hidden but on the page for SEO. */}
+        <h1 className="sr-only">
+          {p.hard.headline} / {p.hopeful.headline}
+        </h1>
+
         {/* the pair, full-page */}
         <div className="mx-auto mt-8 max-w-6xl px-5 sm:px-8">
           <div className="grid overflow-hidden border border-ink/15 md:grid-cols-2">
             {/* hard */}
-            <div className="ink-grain bg-ink p-8 text-bone sm:p-12">
+            <section className="ink-grain bg-ink p-8 text-bone sm:p-12">
               <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-blood">
                 <span className="live-dot" aria-hidden />
                 <span>hard</span>
@@ -87,9 +119,9 @@ export default async function PairingPage({
                   </>
                 )}
               </div>
-              <h1 className="mt-6 font-serif text-3xl italic leading-[1.08] text-bone sm:text-5xl">
+              <h2 className="mt-6 font-serif text-3xl italic leading-[1.08] text-bone sm:text-5xl">
                 {p.hard.headline}
-              </h1>
+              </h2>
               <p className="mt-6 font-sans text-lg leading-relaxed text-bone/80 sm:text-xl">
                 {p.hard.body}
               </p>
@@ -101,10 +133,10 @@ export default async function PairingPage({
               >
                 read the source at {p.hard.source.name} ↗
               </a>
-            </div>
+            </section>
 
             {/* hopeful */}
-            <div className="paper-grain bg-paper p-8 text-ink sm:p-12">
+            <section className="paper-grain bg-paper p-8 text-ink sm:p-12">
               <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-amber">
                 <span
                   className="live-dot"
@@ -122,9 +154,9 @@ export default async function PairingPage({
                   </>
                 )}
               </div>
-              <h1 className="mt-6 font-serif text-3xl italic leading-[1.08] text-ink sm:text-5xl">
+              <h2 className="mt-6 font-serif text-3xl italic leading-[1.08] text-ink sm:text-5xl">
                 {p.hopeful.headline}
-              </h1>
+              </h2>
               <p className="mt-6 font-sans text-lg leading-relaxed text-ink/80 sm:text-xl">
                 {p.hopeful.body}
               </p>
@@ -136,7 +168,7 @@ export default async function PairingPage({
               >
                 read the source at {p.hopeful.source.name} ↗
               </a>
-            </div>
+            </section>
           </div>
 
           {p.editor_note && (

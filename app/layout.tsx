@@ -1,5 +1,29 @@
 import type { Metadata } from "next";
+import { Instrument_Serif, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
+import { OrganizationSchema, WebsiteSchema } from "./components/StructuredData";
+
+// Self-host fonts via next/font — eliminates render-blocking <link> to
+// fonts.googleapis.com, fixes LCP, and gives us automatic preloading.
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif-actual",
+  display: "swap",
+});
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono-actual",
+  display: "swap",
+});
+const sans = Geist({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans-actual",
+  display: "swap",
+});
 
 const SITE_URL = "https://yinyan.news";
 const SITE_NAME = "yinyan.news";
@@ -31,7 +55,16 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: SITE_URL },
+  alternates: {
+    canonical: SITE_URL,
+    types: {
+      "application/rss+xml": [
+        { url: `${SITE_URL}/rss.xml`, title: "yinyan.news — paired daily" },
+      ],
+    },
+  },
+  themeColor: "#0a0908",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
@@ -40,23 +73,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${serif.variable} ${mono.variable} ${sans.variable}`}
+    >
       <body className="paper-grain min-h-screen bg-paper text-ink">
+        <OrganizationSchema />
+        <WebsiteSchema />
         {children}
       </body>
     </html>

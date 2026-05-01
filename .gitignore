@@ -9,3 +9,5 @@ out/
 .vercel
 tsconfig.tsbuildinfo
 next-env.d.ts
+
+.vercel

@@ -13,9 +13,12 @@
   --color-blood: #c7321b;
   --color-amber: #c89944;
 
-  --font-serif: "Instrument Serif", "EB Garamond", Georgia, serif;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
-  --font-sans: "Geist", system-ui, -apple-system, sans-serif;
+  /* next/font injects --font-serif-actual / --font-mono-actual / --font-sans-actual
+     onto <html>. fall through to system fonts during the (very brief) swap
+     window so we never paint a flash of fallback. */
+  --font-serif: var(--font-serif-actual), "EB Garamond", Georgia, serif;
+  --font-mono: var(--font-mono-actual), "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: var(--font-sans-actual), system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
