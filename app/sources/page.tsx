@@ -57,6 +57,21 @@ export default function SourcesPage() {
     a[0].toLowerCase().localeCompare(b[0].toLowerCase()),
   );
 
+  // derive a canonical homepage URL for each source from the first article
+  // url we have. used to make the source heading clickable so readers can
+  // visit the source itself and so search engines see proper outbound
+  // attribution.
+  function homepage(name: string): string | null {
+    const uses = byName.get(name);
+    if (!uses || uses.length === 0) return null;
+    try {
+      const u = new URL(uses[0].url);
+      return `${u.protocol}//${u.host}`;
+    } catch {
+      return null;
+    }
+  }
+
   return (
     <>
       <Header />
@@ -85,9 +100,23 @@ export default function SourcesPage() {
                 className="border-b border-ink/15 pb-10"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-ink/10 pb-3">
-                  <h2 className="font-serif text-2xl italic leading-snug text-ink sm:text-3xl">
-                    {name}
-                  </h2>
+                  {(() => {
+                    const home = homepage(name);
+                    return home ? (
+                      <a
+                        href={home}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-serif text-2xl italic leading-snug text-ink underline-offset-4 hover:text-blood hover:underline sm:text-3xl"
+                      >
+                        {name} ↗
+                      </a>
+                    ) : (
+                      <h2 className="font-serif text-2xl italic leading-snug text-ink sm:text-3xl">
+                        {name}
+                      </h2>
+                    );
+                  })()}
                   <div className="flex gap-3 font-mono text-[10px] uppercase tracking-[0.22em]">
                     {hard > 0 && (
                       <span className="text-blood">

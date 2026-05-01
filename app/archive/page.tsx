@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ArchiveSearch from "../components/ArchiveSearch";
+import { ItemListSchema } from "../components/StructuredData";
 import { PAIRINGS } from "../lib/pairings";
 
 export const metadata: Metadata = {
@@ -13,6 +14,14 @@ export default function ArchivePage() {
   return (
     <>
       <Header />
+      <ItemListSchema
+        name="yinyan.news archive"
+        items={PAIRINGS.map((p) => ({
+          url: `https://yinyan.news/${p.slug}`,
+          title: `${p.hard.headline} / ${p.hopeful.headline}`,
+          date: p.date,
+        }))}
+      />
 
       <article className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink/55">

@@ -172,6 +172,91 @@ export const PAIRINGS: Pairing[] = [
       country: "BR",
     },
   },
+  {
+    slug: "20260423-khalil-deafness",
+    date: "2026-04-23",
+    topic: "health",
+    hard: {
+      headline: "lebanese journalist amal khalil dies under rubble in southern lebanon as medics are blocked from reaching her.",
+      body: "the al-akhbar correspondent had taken shelter in a building that was then directly struck on april 22. cpj said the failure to allow medical access in time may constitute a war crime. it brings to fifteen the journalists and media workers killed by israel in lebanon since october 2023.",
+      source: { name: "Committee to Protect Journalists", url: "https://cpj.org/2026/04/cpj-calls-for-urgent-international-investigation-into-israels-killing-of-lebanese-journalist-amal-khalil/" },
+      country: "LB",
+    },
+    hopeful: {
+      headline: "the fda approves the first gene therapy for inherited deafness, with eighty percent of trial children gaining hearing.",
+      body: "approved april 23, otarmeni delivers a working copy of the otof gene to children born without the ear-to-brain messenger protein. of twenty trial participants, sixteen gained hearing; five reached essentially normal range. regeneron has committed to providing the therapy at no cost to patients in the united states.",
+      source: { name: "CNN", url: "https://edition.cnn.com/2026/04/23/health/fda-gene-therapy-inherited-deafness-regeneron" },
+      country: "global",
+    },
+  },
+  {
+    slug: "20260421-ice-mars",
+    date: "2026-04-21",
+    topic: "science",
+    hard: {
+      headline: "ice custody deaths reach a record seventeen in the current fiscal year.",
+      body: "the latest, twenty-seven-year-old aled carbonell-betancourt of cuba, was found dead in detention and ruled a suicide. the figure surpasses every annual total in more than two decades of recorded ice deaths. on april 21, sixty-two military veterans were arrested at the cannon house office building protesting the iran war.",
+      source: { name: "Democracy Now!", url: "https://www.democracynow.org/2026/4/21/headlines" },
+      country: "US",
+    },
+    hopeful: {
+      headline: "curiosity finds the largest organic molecules ever detected on mars, including dna-precursor compounds.",
+      body: "results published april 21 in nature communications describe more than twenty organics, among them benzothiophene and nitrogen-bearing rings, drilled from clay-rich rock in glen torridon. some may have been preserved for three and a half billion years. their origin, biological, geological, or meteoritic, remains undetermined.",
+      source: { name: "Phys.org", url: "https://phys.org/news/2026-04-mars-rover-compounds.html" },
+      country: "global",
+    },
+  },
+  {
+    slug: "20260420-teotihuacan-goldman",
+    date: "2026-04-20",
+    topic: "rights",
+    hard: {
+      headline: "a gunman opens fire from atop the pyramid of the moon, killing one tourist and wounding thirteen.",
+      body: "julio césar jasso ramírez, twenty-seven, fired roughly thirty rounds into the crowd at teotihuacán shortly before noon on april 20, then took his own life. a canadian woman was killed; the wounded included six americans, three colombians, two brazilians, a russian and another canadian. notes referenced the 1999 columbine massacre.",
+      source: { name: "CBS News", url: "https://www.cbsnews.com/news/mexico-shooting-teotihuacan-pyramids/" },
+      country: "MX",
+    },
+    hopeful: {
+      headline: "the goldman environmental prize names six women laureates, a first in the award's thirty-seven-year history.",
+      body: "honored in san francisco on april 20: iroro tanshi for protecting nigeria's short-tailed roundleaf bat, sarah finch for the uk supreme court ruling on downstream emissions, theonila roka matbob for the panguna mine accord, alannah hurley for the pebble mine veto, yuvelis morales blanco for the colombian fracking ruling, and borim kim for asia's first youth climate verdict.",
+      source: { name: "Mongabay", url: "https://news.mongabay.com/2026/04/meet-the-2026-goldman-environmental-prize-winners/" },
+      country: "global",
+    },
+  },
+  {
+    slug: "20260419-shreveport-stratford",
+    date: "2026-04-19",
+    topic: "culture",
+    hard: {
+      headline: "eight children, ages three to eleven, are killed by their father across three shreveport homes.",
+      body: "shamar elkins, thirty-one, shot seven of his biological children and one nephew in the early hours of april 19, then was killed by police after a pursuit. it is the deadliest single-day mass shooting in louisiana history and the deadliest in the united states since january 2024. two women were also seriously wounded.",
+      source: { name: "RTE", url: "https://www.rte.ie/news/us/2026/0420/1569102-louisiana-shooting/" },
+      country: "US",
+    },
+    hopeful: {
+      headline: "the v&a east opens in stratford with a 125-year retrospective of black british music.",
+      body: "the museum's first-ever exhibition, the music is black: a british story, opened to the public on april 18, tracing lovers rock, two tone, jungle, trip hop, grime and beyond across more than two hundred objects. joan armatrading's childhood guitar sits beside samuel coleridge-taylor's conducting batons from the early 1900s.",
+      source: { name: "V&A", url: "https://www.vam.ac.uk/exhibitions/the-music-is-black-a-british-story" },
+      country: "GB",
+    },
+  },
+  {
+    slug: "20260418-peacekeeper-prize",
+    date: "2026-04-18",
+    topic: "science",
+    hard: {
+      headline: "a french peacekeeper is killed in southern lebanon, one day into a fragile ceasefire.",
+      body: "staff sergeant florian montorio, of the 17th parachute engineer regiment, was clearing an isolated road in ghandouriyeh when small-arms fire hit his unifil disposal team on april 18. macron and unifil attribute the ambush to hezbollah, which denies it. a wounded corporal would die in paris four days later.",
+      source: { name: "Al Jazeera", url: "https://www.aljazeera.com/news/2026/4/18/french-soldier-serving-with-unifil-killed-in-lebanon-attack" },
+      country: "LB",
+    },
+    hopeful: {
+      headline: "the breakthrough prize names laureates whose work has already turned three incurable diseases into treatable ones.",
+      body: "announced in los angeles on april 18, the 2026 breakthrough prize honors gene therapies for inherited blindness, sickle cell disease, and beta-thalassemia. six prizes of three million dollars each were awarded across life sciences, physics, and mathematics, bringing the program's fifteen-year total above 340 million.",
+      source: { name: "Breakthrough Prize", url: "https://breakthroughprize.org/News/98" },
+      country: "global",
+    },
+  },
 ];
 
 export function getPairing(slug: string): Pairing | undefined {

@@ -117,6 +117,33 @@ export function NewsArticleSchema({ pairing }: { pairing: Pairing }) {
   );
 }
 
+export function ItemListSchema({
+  name,
+  items,
+}: {
+  name: string;
+  items: { url: string; title: string; date: string }[];
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: it.url,
+      name: it.title,
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: ldjson(data) }}
+    />
+  );
+}
+
 export function BreadcrumbSchema({
   trail,
 }: {

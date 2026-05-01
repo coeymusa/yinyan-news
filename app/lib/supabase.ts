@@ -28,3 +28,25 @@ export async function insertDispatchSubscriber(input: {
   });
   return { ok: r.ok };
 }
+
+export async function insertSubmission(input: {
+  url: string;
+  why?: string | null;
+  email?: string | null;
+  ip_hash: string | null;
+}): Promise<{ ok: boolean }> {
+  const base = process.env[URL_KEY];
+  const k = process.env[SERVICE_KEY];
+  if (!base || !k) return { ok: false };
+  const r = await fetch(`${base}/rest/v1/submissions`, {
+    method: "POST",
+    headers: {
+      apikey: k,
+      Authorization: `Bearer ${k}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify(input),
+  });
+  return { ok: r.ok };
+}

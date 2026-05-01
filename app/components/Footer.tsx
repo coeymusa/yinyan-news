@@ -91,6 +91,9 @@ export default function Footer() {
               <Link href="/press" className="hover:text-blood">
                 press ↗
               </Link>
+              <Link href="/submit" className="hover:text-blood">
+                submit a tip ↗
+              </Link>
               <a href="/rss.xml" className="hover:text-blood">
                 rss ↗
               </a>
