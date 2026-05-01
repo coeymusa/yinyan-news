@@ -12,6 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/editor`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE}/archive`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE}/stats`, lastModified: now, changeFrequency: "daily", priority: 0.6 },
+    { url: `${SITE}/sources`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE}/press`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE}/embed`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
   ];
   const topics: MetadataRoute.Sitemap = [
     "climate","war","democracy","economy","ai","health",

@@ -9,7 +9,13 @@ import {
   NewsArticleSchema,
 } from "../components/StructuredData";
 import ShareLinks from "../components/ShareLinks";
-import { allSlugs, getPairing, PAIRINGS, TOPIC_LABEL } from "../lib/pairings";
+import {
+  allSlugs,
+  getPairing,
+  PAIRINGS,
+  pairingsByTopic,
+  TOPIC_LABEL,
+} from "../lib/pairings";
 import { formatDate } from "../lib/format";
 
 export function generateStaticParams() {
@@ -188,6 +194,59 @@ export default async function PairingPage({
             />
           </div>
         </div>
+
+        {/* more in this topic — internal linking, distributes link
+            equity across the topic landing page and adjacent pairings */}
+        {(() => {
+          const related = pairingsByTopic(p.topic)
+            .filter((x) => x.slug !== p.slug)
+            .slice(0, 3);
+          if (related.length === 0) return null;
+          return (
+            <section className="mx-auto mt-24 max-w-6xl border-t border-ink/15 px-5 pt-10 sm:px-8">
+              <div className="mb-6 flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-ink/55">
+                <Link
+                  href={`/topic/${p.topic}`}
+                  className="hover:text-blood"
+                >
+                  more in {TOPIC_LABEL[p.topic]} →
+                </Link>
+                <span className="text-ink/40">
+                  {pairingsByTopic(p.topic).length - 1} more
+                </span>
+              </div>
+              <ul className="grid gap-4 sm:grid-cols-3">
+                {related.map((r) => (
+                  <li key={r.slug}>
+                    <Link href={`/${r.slug}`} className="group block">
+                      <div className="grid h-full grid-cols-2 overflow-hidden border border-ink/15">
+                        <div className="ink-grain bg-ink p-4 text-bone">
+                          <div className="font-mono text-[8px] uppercase tracking-[0.3em] text-blood">
+                            hard
+                          </div>
+                          <p className="mt-2 font-serif text-sm italic leading-snug text-bone group-hover:text-blood">
+                            {r.hard.headline}
+                          </p>
+                        </div>
+                        <div className="paper-grain bg-paper p-4 text-ink">
+                          <div className="font-mono text-[8px] uppercase tracking-[0.3em] text-amber">
+                            hopeful
+                          </div>
+                          <p className="mt-2 font-serif text-sm italic leading-snug text-ink group-hover:text-amber">
+                            {r.hopeful.headline}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-ink/45">
+                        {formatDate(r.date)}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })()}
 
         {/* prev / next */}
         <nav className="mx-auto mt-20 max-w-5xl border-t border-ink/15 px-5 py-10 sm:px-8">

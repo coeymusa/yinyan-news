@@ -82,6 +82,15 @@ export default function Footer() {
               <Link href="/random" className="hover:text-blood">
                 stumble ↗
               </Link>
+              <Link href="/sources" className="hover:text-blood">
+                sources ↗
+              </Link>
+              <Link href="/embed" className="hover:text-blood">
+                embed ↗
+              </Link>
+              <Link href="/press" className="hover:text-blood">
+                press ↗
+              </Link>
               <a href="/rss.xml" className="hover:text-blood">
                 rss ↗
               </a>
