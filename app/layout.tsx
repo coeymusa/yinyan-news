@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { OrganizationSchema, WebsiteSchema } from "./components/StructuredData";
+import { Analytics } from '@vercel/analytics/next';
 
 // Self-host fonts via next/font — eliminates render-blocking <link> to
 // fonts.googleapis.com, fixes LCP, and gives us automatic preloading.
