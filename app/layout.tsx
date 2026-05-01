@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { OrganizationSchema, WebsiteSchema } from "./components/StructuredData";
+import { Analytics } from '@vercel/analytics/next';
 
 // Self-host fonts via next/font — eliminates render-blocking <link> to
 // fonts.googleapis.com, fixes LCP, and gives us automatic preloading.
@@ -81,6 +82,7 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebsiteSchema />
         {children}
+        <Analytics />
       </body>
     </html>
   );
