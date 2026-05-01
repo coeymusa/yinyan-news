@@ -11,15 +11,15 @@ export default function Header() {
           <Wordmark />
         </Link>
 
-        <nav className="flex items-center gap-5 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/65 sm:gap-8">
-          <Link href="/archive" className="transition hover:text-blood">
+        <nav className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/65 sm:gap-7">
+          <Link href="/archive" className="hidden transition hover:text-blood sm:inline">
             archive
+          </Link>
+          <Link href="/random" className="transition hover:text-blood">
+            stumble
           </Link>
           <Link href="/manifesto" className="transition hover:text-blood">
             manifesto
-          </Link>
-          <Link href="/editor" className="hidden transition hover:text-blood sm:inline">
-            editor
           </Link>
           <Link
             href="#dispatch"

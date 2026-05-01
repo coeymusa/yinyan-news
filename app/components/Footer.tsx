@@ -63,7 +63,7 @@ export default function Footer() {
               for every hard headline, an equal-weight one that's hopeful.
               we will not break the rule.
             </p>
-            <div className="mt-5 flex flex-wrap gap-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/55">
+            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/55">
               <Link href="/manifesto" className="hover:text-blood">
                 manifesto ↗
               </Link>
@@ -76,9 +76,33 @@ export default function Footer() {
               <Link href="/archive" className="hover:text-blood">
                 archive ↗
               </Link>
+              <Link href="/stats" className="hover:text-blood">
+                stats ↗
+              </Link>
+              <Link href="/random" className="hover:text-blood">
+                stumble ↗
+              </Link>
+              <a href="/rss.xml" className="hover:text-blood">
+                rss ↗
+              </a>
             </div>
           </div>
         </div>
+
+        {/* quiet mooncake aside — only-if-it-resonated voice. lives at
+            the very end so it never interrupts the editorial flow. */}
+        <p className="mt-14 max-w-2xl font-serif text-base italic leading-relaxed text-ink/55">
+          if any of these pairings stayed with you, you can keep talking at{" "}
+          <a
+            href="https://getmooncake.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink/75 underline-offset-4 hover:text-blood hover:underline"
+          >
+            getmooncake.com
+          </a>
+          {" "}— a quiet space for the conversations the news leaves you with.
+        </p>
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-ink/45">
           <span>vol. I · the ledger of {year}</span>

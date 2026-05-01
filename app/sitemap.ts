@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/about`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE}/editor`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE}/archive`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE}/stats`, lastModified: now, changeFrequency: "daily", priority: 0.6 },
   ];
   const topics: MetadataRoute.Sitemap = [
     "climate","war","democracy","economy","ai","health",

@@ -192,6 +192,48 @@ export function pinnedFirst(): Pairing[] {
   return [...pinned, ...rest];
 }
 
+// counts used by /stats and the homepage stats strip. computed at
+// build-time so they update on every deploy without a roundtrip.
+export function computeStats() {
+  const total = PAIRINGS.length;
+  const countries = new Set<string>();
+  const sources = new Set<string>();
+  const topics = new Set<string>();
+  let hardCountries = 0;
+  let hopefulCountries = 0;
+  for (const p of PAIRINGS) {
+    if (p.hard.country && p.hard.country !== "global") {
+      countries.add(p.hard.country);
+      hardCountries++;
+    }
+    if (p.hopeful.country && p.hopeful.country !== "global") {
+      countries.add(p.hopeful.country);
+      hopefulCountries++;
+    }
+    sources.add(p.hard.source.name);
+    sources.add(p.hopeful.source.name);
+    topics.add(p.topic);
+  }
+  // earliest pairing date — "since X" copy
+  const dates = PAIRINGS.map((p) => p.date).sort();
+  return {
+    total,
+    countries: countries.size,
+    sources: sources.size,
+    topics: topics.size,
+    hardCountries,
+    hopefulCountries,
+    earliest: dates[0],
+    latest: dates[dates.length - 1],
+  };
+}
+
+export function pickRandomSlug(): string {
+  if (PAIRINGS.length === 0) return "";
+  // intentionally not deterministic — this is the "stumble" feature
+  return PAIRINGS[Math.floor(Math.random() * PAIRINGS.length)].slug;
+}
+
 export const TOPIC_LABEL: Record<PairingTopic, string> = {
   climate: "climate & environment",
   war: "conflict & peace",

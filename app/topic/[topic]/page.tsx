@@ -10,6 +10,7 @@ import {
   TOPIC_LABEL,
   type PairingTopic,
 } from "../../lib/pairings";
+import { TOPIC_CONTENT } from "../../lib/topic-content";
 
 const TOPICS: PairingTopic[] = [
   "climate","war","democracy","economy","ai","health",
@@ -51,6 +52,7 @@ export default async function TopicPage({
   const t = topic as PairingTopic;
   const pairings = pairingsByTopic(t);
   const label = TOPIC_LABEL[t];
+  const content = TOPIC_CONTENT[t];
 
   return (
     <>
@@ -72,10 +74,14 @@ export default async function TopicPage({
             <h1 className="mt-4 font-serif text-5xl italic leading-[1.05] text-ink sm:text-7xl">
               {label}.
             </h1>
-            <p className="mt-6 max-w-2xl font-serif text-xl italic leading-relaxed text-ink/65 sm:text-2xl">
-              {pairings.length} pairing{pairings.length === 1 ? "" : "s"} on
-              this topic. for every hard headline,{" "}
-              <span className="text-amber">an equal-weight one that's hopeful</span>.
+            <p className="mt-6 max-w-2xl font-serif text-xl italic leading-relaxed text-ink/75 sm:text-2xl">
+              {content.lede}
+            </p>
+            <p className="mt-8 max-w-2xl font-sans text-base leading-relaxed text-ink/65 sm:text-lg">
+              {content.manifesto}
+            </p>
+            <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.28em] text-ink/45">
+              {pairings.length} pairing{pairings.length === 1 ? "" : "s"} on this topic
             </p>
           </div>
         </section>
