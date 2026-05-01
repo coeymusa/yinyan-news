@@ -67,6 +67,9 @@ export default function Footer() {
               <Link href="/manifesto" className="hover:text-blood">
                 manifesto ↗
               </Link>
+              <Link href="/editor" className="hover:text-blood">
+                editor ↗
+              </Link>
               <Link href="/about" className="hover:text-blood">
                 about ↗
               </Link>

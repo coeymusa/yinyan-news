@@ -18,8 +18,8 @@ export default function Header() {
           <Link href="/manifesto" className="transition hover:text-blood">
             manifesto
           </Link>
-          <Link href="/about" className="hidden transition hover:text-blood sm:inline">
-            about
+          <Link href="/editor" className="hidden transition hover:text-blood sm:inline">
+            editor
           </Link>
           <Link
             href="#dispatch"

@@ -8,6 +8,7 @@ import {
   BreadcrumbSchema,
   NewsArticleSchema,
 } from "../components/StructuredData";
+import ShareLinks from "../components/ShareLinks";
 import { allSlugs, getPairing, PAIRINGS, TOPIC_LABEL } from "../lib/pairings";
 import { formatDate } from "../lib/format";
 
@@ -176,6 +177,16 @@ export default async function PairingPage({
               ed. — {p.editor_note}
             </p>
           )}
+
+          {/* share — high-intent moment, right under the pairing */}
+          <div className="mx-auto mt-12 max-w-2xl">
+            <ShareLinks
+              url={`https://yinyan.news/${p.slug}`}
+              hardHeadline={p.hard.headline}
+              hopefulHeadline={p.hopeful.headline}
+              tone="light"
+            />
+          </div>
         </div>
 
         {/* prev / next */}
