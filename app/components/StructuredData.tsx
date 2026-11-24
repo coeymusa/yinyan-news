@@ -34,7 +34,6 @@ export function OrganizationSchema() {
     },
     sameAs: [
       "https://coreyscodecave.com",
-      "https://whatisyourconcern.com",
       "https://getmooncake.com",
       "https://github.com/coeymusa/yinyan-news",
     ],

@@ -32,17 +32,6 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 font-serif text-base italic text-ink/75">
               <li>
                 <a
-                  href="https://whatisyourconcern.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline-offset-4 hover:text-blood hover:underline"
-                >
-                  whatisyourconcern.com
-                </a>
-                <span className="text-ink/40"> — what people are afraid of</span>
-              </li>
-              <li>
-                <a
                   href="https://getmooncake.com"
                   target="_blank"
                   rel="noopener noreferrer"

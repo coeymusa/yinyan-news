@@ -4,7 +4,8 @@ Editorial-paired news. For every hard headline in the world, an
 equal-weight one that's hopeful. Curated, slow, deliberately small.
 
 This is part of Corey Musa's `coreyscodecave.com` family — sister
-sites: `whatisyourconcern.com`, `getmooncake.com`. Voice and visual
+site: `getmooncake.com` (`whatisyourconcern.com` was taken down on
+2026-09-29; never link to it). Voice and visual
 language should feel related (italic serif, lowercase headlines,
 editorial-dystopia restraint) but distinct. yinyan.news is **not**
 about anonymity or community — it's about *curation*. The editor

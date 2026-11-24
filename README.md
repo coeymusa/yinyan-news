@@ -2,19 +2,20 @@
 
 > for every hard headline in the world, an equal-weight one that's hopeful.
 
-A slow, paired ledger of the world. Curated by hand, one pairing a day,
-sometimes none. Part of the
-[coreyscodecave.com](https://coreyscodecave.com) family of small,
-quiet sites — sister to
-[whatisyourconcern.com](https://whatisyourconcern.com) and
+A slow, paired ledger of the world. One pairing a day, sometimes none.
+Part of the [coreyscodecave.com](https://coreyscodecave.com) family of
+small, quiet sites — sister to
 [getmooncake.com](https://getmooncake.com).
 
 ## Stack
 
 - Next.js 16 (App Router) + React 19 + TypeScript
 - Tailwind v4 (CSS-first `@theme` config)
-- Static rendering for all pairing pages — content lives as TS data in
-  `app/lib/pairings.ts`. No CMS until there's a real reason for one.
+- Static rendering for all pairing pages. Content merges from two
+  sources: hand-curated TS data in `app/lib/pairings.ts` and an
+  auto-generated JSON archive in `app/lib/generated-pairings.json`.
+- Daily auto-pair cron pulls real RSS, drafts a pairing via Vercel AI
+  Gateway, commits to GitHub, Vercel rebuilds. No CMS, no DB.
 - Optional Supabase persistence for the dispatch newsletter; falls back
   to a no-op when env is unset, so dev and previews don't break.
 - Hosted on Vercel.
@@ -65,6 +66,43 @@ Without these set, `/api/dispatch` returns ok without persisting — the
 form works in dev but doesn't store emails. Add the env on Vercel to
 turn on real subscriber capture, then run `supabase/dispatch.sql` in
 your Supabase SQL editor.
+
+## Auto-pair (the site grows itself)
+
+A daily cron at `/api/cron/auto-pair` pulls RSS from reputable hard
+and hopeful sources, asks the AI Gateway for one structured pairing in
+the editorial voice, and commits it to `app/lib/generated-pairings.json`
+via the GitHub API. The commit triggers a Vercel rebuild, which
+republishes the site with the new pairing on top.
+
+The cron is idempotent: if today already has a pairing in either
+archive, it skips. If candidates are thin, it skips. If the AI output
+fails voice/word-balance validation, it skips. Better a quiet day than
+a junk pairing.
+
+Required env on Vercel for auto-pair:
+
+```
+CRON_SECRET=<long random string>
+AI_GATEWAY_API_KEY=<from Vercel AI Gateway, or auto-injected on Vercel>
+GITHUB_TOKEN=<fine-grained PAT, contents:write on this repo>
+GITHUB_REPO=coeymusa/yinyan-news
+GITHUB_BRANCH=main
+AI_MODEL=anthropic/claude-sonnet-4-6  # optional override
+```
+
+Manual probe (replace `<secret>`):
+
+```
+curl "https://yinyan.news/api/cron/auto-pair?force=<secret>&dry=1"
+```
+
+`dry=1` runs the full pipeline but does not commit — useful for
+sanity-checking model output without burning a slot for the day.
+
+To pause auto-pair, remove the `auto-pair` entry from `vercel.json`
+crons and redeploy. The curated `CURATED` archive in
+`app/lib/pairings.ts` is untouched; the editor can always step in.
 
 ## What's in the box
 

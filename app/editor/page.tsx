@@ -22,7 +22,7 @@ const personSchema = {
   name: "Corey Musa",
   jobTitle: "Editor",
   description:
-    "Editor and curator of yinyan.news. Builds small, quiet things on the internet, including whatisyourconcern.com and getmooncake.com.",
+    "Editor and curator of yinyan.news. Builds small, quiet things on the internet, including getmooncake.com.",
   url: "https://coreyscodecave.com",
   image: "https://coreyscodecave.com/avatar.png",
   worksFor: {
@@ -33,7 +33,6 @@ const personSchema = {
   sameAs: [
     "https://coreyscodecave.com",
     "https://github.com/coeymusa",
-    "https://whatisyourconcern.com",
     "https://getmooncake.com",
   ],
 };
@@ -79,16 +78,7 @@ export default function EditorPage() {
           <p>
             corey is a software builder, formerly at ubs and credit suisse,
             now full-time on small, quiet things on the internet — sister
-            sites{" "}
-            <a
-              href="https://whatisyourconcern.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline-offset-4 hover:text-blood hover:underline"
-            >
-              whatisyourconcern.com
-            </a>{" "}
-            and{" "}
+            site{" "}
             <a
               href="https://getmooncake.com"
               target="_blank"

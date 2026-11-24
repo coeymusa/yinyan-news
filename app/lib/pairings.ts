@@ -1,8 +1,16 @@
-// Pairings — the entire editorial archive lives here as typed data.
+// Pairings — editorial archive.
 //
-// To add a new pairing: paste a new object at the TOP of PAIRINGS,
-// give it a slug like "20260501-supreme-court", fill in both halves
-// to roughly equal word counts, and push.
+// Two sources merge into the public PAIRINGS export:
+//   1. CURATED below — hand-written by the editor, the seed of the site.
+//   2. GENERATED in `generated-pairings.json` — written by the daily
+//      auto-pair cron (see `app/api/cron/auto-pair/route.ts`).
+//
+// The cron commits new entries into the JSON file via the GitHub API,
+// which triggers a Vercel rebuild. Static rendering is preserved.
+//
+// To add a curated pairing by hand: paste a new object at the TOP of
+// CURATED, give it a slug like "20260501-supreme-court", fill in both
+// halves to roughly equal word counts, and push.
 //
 // Voice rules (see CLAUDE.md):
 // - Lowercase headlines and body.
@@ -47,7 +55,7 @@ export type Pairing = {
 // Every pairing here is sourced from real news within ~2 weeks of its
 // publication date. URLs verified at insertion time. Editorial voice
 // rules in CLAUDE.md.
-export const PAIRINGS: Pairing[] = [
+const CURATED: Pairing[] = [
   {
     slug: "20260501-pressfreedom-syria",
     date: "2026-05-01",
@@ -258,6 +266,24 @@ export const PAIRINGS: Pairing[] = [
     },
   },
 ];
+
+import generatedJson from "./generated-pairings.json";
+const GENERATED = generatedJson as Pairing[];
+
+// Public archive. Generated pairings sit on top (newest, automated),
+// then curated pairings below. Slug collisions are won by curated —
+// the editor always overrides the cron.
+export const PAIRINGS: Pairing[] = (() => {
+  const curatedSlugs = new Set(CURATED.map((p) => p.slug));
+  const generatedFiltered = GENERATED.filter((p) => !curatedSlugs.has(p.slug));
+  const merged = [...generatedFiltered, ...CURATED];
+  // sort by date desc, but keep pinned first
+  merged.sort((a, b) => {
+    if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1;
+    return b.date.localeCompare(a.date);
+  });
+  return merged;
+})();
 
 export function getPairing(slug: string): Pairing | undefined {
   return PAIRINGS.find((p) => p.slug === slug);

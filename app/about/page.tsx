@@ -38,15 +38,6 @@ export default function AboutPage() {
             , a builder of small, quiet things on the internet. it is a sister
             site to{" "}
             <a
-              href="https://whatisyourconcern.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline-offset-4 hover:text-blood hover:underline"
-            >
-              whatisyourconcern.com
-            </a>{" "}
-            and{" "}
-            <a
               href="https://getmooncake.com"
               target="_blank"
               rel="noopener noreferrer"
